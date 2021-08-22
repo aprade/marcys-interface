@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/react,visualstudiocode,macos,windows,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=react,visualstudiocode,macos,windows,linux
-
+.next
+node_modules
 ### Linux ###
 *~
 
