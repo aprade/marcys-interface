@@ -1,8 +1,12 @@
-import Navbar from '../components/navbar'
+import type { NextPage } from 'next'
+import Sidebar from '../components/sidebar';
 
-export default function Home() {
+const Home: NextPage = () => {
   return (
-      <Navbar></Navbar>
-  )
+		<>
+			<Sidebar />
+		</>
+	);
 }
-  
+
+export default Home
