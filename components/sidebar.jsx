@@ -9,7 +9,7 @@ import { SettingsIcon } from './icons/settings';
 
 function Button(props) {
 	return (
-		<button onClick={props.onClick} className="flex w-full py-4 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white cursor-pointer outline-none">
+		<button onClick={props.onClick} className={`${props.className} flex w-full py-4 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white cursor-pointer outline-none`}>
 			{props.icon}
 			{props.innerHTML}
 		</button>
@@ -45,11 +45,11 @@ export default function Sidebar() {
 					</svg>
 					<span className="text-2xl font-extrabold">Marcys</span>
 				</a>
-				<nav className="py-8">
+				<nav className="py-8 flex flex-col h-5/6">
 					<Button icon={<ChartIcon className="mx-1.5" />} innerHTML="Dashboard"/>
 					<Button onClick={openDialog} icon={<AddIcon className="mx-1.5" />} innerHTML="Add new"/>
 					<Button icon={<TrashIcon className="mx-1.5" />} innerHTML="Remove"/>
-					<Button icon={<SettingsIcon className="mx-1.5" />} innerHTML="Settings"/>
+					<Button icon={<SettingsIcon className="mx-1.5" />} className="mt-auto" innerHTML="Settings"/>
 				</nav>
 			</div>
 			<div className="flex-1 p-10 text-2xl font-bold">
