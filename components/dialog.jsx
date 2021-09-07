@@ -5,9 +5,9 @@ export default function Dialog(props) {
 		<>
 			{props.show ? (
 				<div className="absolute flex justify-center items-center z-10 w-screen h-screen bg-black bg-opacity-30">
-					<div className="relative flex flex-col justify-between z-20 space-y-5 w-102 rounded shadow-xl p-6 bg-white">
-						<button onClick={() => props.set(current => !current)}>
-							<CloseIcon className="absolute z-40 top-0 right-0 m-3 opacity-50 hover:bg-blue-400 rounded-full p-1" />
+					<div className="relative flex flex-col justify-between z-20 space-y-5 w-102 rounded shadow-xl px-6 pb-6 bg-white">
+						<button className="absolute z-40 top-0 right-0" onClick={() => props.set(current => !current)}>
+							<CloseIcon className="m-3 opacity-50 hover:bg-blue-400 rounded-full p-1" />
 						</button>
 						<div>
 							<h1 className="font-bold tracking-tight">{props.title}</h1>
@@ -17,7 +17,7 @@ export default function Dialog(props) {
 							{props.fields.map((field) => {
 								return (
 									<fieldset class="flex w-full space-x-3 justify-items-center items-center text-right">
-										<label for={field.name} className="w-3/12 font-light text-blue-500">{field.label}</label>
+										<label for={field.name} className="w-3/12 font-semibold text-blue-500">{field.label}</label>
 										<input
 											id={field.name}
 											placeholder={field.placeholder}

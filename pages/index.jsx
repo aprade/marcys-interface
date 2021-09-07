@@ -1,7 +1,9 @@
 
 import { useState } from 'react';
 
+import Dialog from '../components/dialog';
 import Sidebar from '../components/sidebar';
+
 import { ComputerIcon } from '../components/icons/computer';
 import { CheckIcon } from '../components/icons/check';
 import { CPUIcon } from '../components/icons/cpu';
@@ -9,10 +11,34 @@ import { LogoIcon } from '../components/icons/logo';
 import { AddIcon } from '../components/icons/add';
 import { TrashIcon } from '../components/icons/trash';
 
+const AddDialogFields = [
+	{
+		name: 'name-field',
+		label: 'Name',
+		placeholder: 'aws-machine-one'
+	},
+	{
+		name: 'ip-field',
+		label: 'IP Address',
+		placeholder: '192.168.1.101'
+	}
+]
+
+const RemoveDialogFields = [
+	{
+		name: 'name-field',
+		label: 'Name',
+		placeholder: 'aws-machine-one'
+	}
+]
+
 const Home = () => {
-	const [ showDashboardOver, setShowDashboardOver ] = useState(false);
-	const [ showAddOver, setShowAddOver ] = useState(false);
-	const [ showRemoveOver, setShowRemoveOver ] = useState(false);
+	const [showAddDialog, setShowAddDialog] = useState(false);
+	const [showRemoveDialog, setShowRemoveDialog] = useState(false);
+
+	const [showDashboardOver, setShowDashboardOver] = useState(false);
+	const [showAddOver, setShowAddOver] = useState(false);
+	const [showRemoveOver, setShowRemoveOver] = useState(false);
 
 	return (
 		<div className="flex h-screen bg-gray-100">
@@ -23,37 +49,34 @@ const Home = () => {
 						<LogoIcon className="w-8 h-8" />
 					</div>
 					<div
-						className="flex w-16 h-16 items-center justify-center hover:bg-gray-100"
+						className="flex w-16 h-16 items-center justify-center hover:bg-gray-100 transition-all"
 						onMouseOver={() => setShowDashboardOver(prev => !prev)}
 						onMouseOut={() => setShowDashboardOver(prev => !prev)}>
 						<CPUIcon className="w-8 h-8" />
 						{ showDashboardOver ? (
-							<span className="absolute left-20 bg-white py-2 px-4 rounded shadow-xl transition-opacity">Dashboard</span> 
+							<span className="absolute left-20 bg-white py-2 px-4 rounded shadow-xl">Dashboard</span> 
 						) : null}
 					</div>
 					<div
-						className="flex w-16 h-16 items-center justify-center hover:bg-gray-100"
+						className="flex w-16 h-16 items-center justify-center hover:bg-gray-100 transition-all"
 						onMouseOver={() => setShowAddOver(prev => !prev)}
-						onMouseOut={() => setShowAddOver(prev => !prev)}>
+						onMouseOut={() => setShowAddOver(prev => !prev)}
+						onClick={() => setShowAddDialog(prev => !prev)}>
 						<AddIcon className="w-8 h-8" />
 						{ showAddOver ? (
 							<span className="absolute left-20 bg-white py-2 px-4 rounded shadow-xl">Add new</span> 
 						) : null}
 					</div>
 					<div
-						className="flex w-16 h-16 items-center justify-center hover:bg-gray-100"
+						className="flex w-16 h-16 items-center justify-center hover:bg-gray-100 transition-all"
 						onMouseOver={() => setShowRemoveOver(prev => !prev)}
-						onMouseOut={() => setShowRemoveOver(prev => !prev)}>
+						onMouseOut={() => setShowRemoveOver(prev => !prev)}
+						onClick={() => setShowRemoveDialog(prev => !prev)}>
 						<TrashIcon className="w-8 h-8" />
 						{ showRemoveOver ? (
 							<span className="absolute left-20 bg-white py-2 px-4 rounded shadow-xl">Remove</span> 
 						) : null}
 					</div>
-				</div>
-				<div className="flex flex-col space-y-4">
-					<a href=""><div className="rounded-full bg-gray-400 w-8 h-8"></div></a>
-					<a href=""><div className="rounded-full bg-gray-400 w-8 h-8"></div></a>
-					<a href=""><div className="rounded-full bg-gray-400 w-8 h-8"></div></a>
 				</div>
 			</div>
 
@@ -107,9 +130,20 @@ const Home = () => {
 						</a>
 					</div>
 				</div>
-				<div className="bg-red-200 h-64"></div>
 			</div>
 			<div className="flex-auto bg-white rounded-tl-xl shadow-xl"></div>
+			<Dialog
+				show={showAddDialog}
+				set={setShowAddDialog}
+				title="Add a machine"
+				description="Here you will add a new machine that you need to monitor. Click save when you're done."
+				fields={AddDialogFields}/>
+			<Dialog
+				show={showRemoveDialog}
+				set={setShowRemoveDialog}
+				title="Remove a machine"
+				description="Here you will remove an existent machine from the dashboard. Click save when you're done."
+				fields={RemoveDialogFields}/>
 		</div>
 	);
 }
