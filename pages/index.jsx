@@ -1,5 +1,5 @@
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import Dialog from '../components/dialog';
 import Sidebar from '../components/sidebar';
@@ -32,13 +32,32 @@ const RemoveDialogFields = [
 	}
 ]
 
+function MachineOption(props) {
+	return (
+		<div className="flex items-center justify-between">
+			<div className="flex flex-auto">
+				<ComputerIcon className="stroke-icon-grey mr-2" />
+				{props.text}
+			</div>
+			<CheckIcon />
+		</div>
+	);
+}
+
 const Home = () => {
+	const [machines, setMachines] = useState([]);
+
 	const [showAddDialog, setShowAddDialog] = useState(false);
 	const [showRemoveDialog, setShowRemoveDialog] = useState(false);
 
 	const [showDashboardOver, setShowDashboardOver] = useState(false);
 	const [showAddOver, setShowAddOver] = useState(false);
 	const [showRemoveOver, setShowRemoveOver] = useState(false);
+
+	useEffect(async () => {
+		const machines = await axios.get('http://localhost:8080/machines');
+		setMachines(machines.data.machines);
+	}, [setMachines]);
 
 	return (
 		<div className="flex h-screen bg-gray-100">
@@ -53,8 +72,8 @@ const Home = () => {
 						onMouseOver={() => setShowDashboardOver(prev => !prev)}
 						onMouseOut={() => setShowDashboardOver(prev => !prev)}>
 						<CPUIcon className="w-8 h-8" />
-						{ showDashboardOver ? (
-							<span className="absolute left-20 bg-white py-2 px-4 rounded shadow-xl">Dashboard</span> 
+						{showDashboardOver ? (
+							<span className="absolute left-20 font-semibold bg-white py-2 px-4 rounded shadow-xl">Dashboard</span>
 						) : null}
 					</div>
 					<div
@@ -63,8 +82,8 @@ const Home = () => {
 						onMouseOut={() => setShowAddOver(prev => !prev)}
 						onClick={() => setShowAddDialog(prev => !prev)}>
 						<AddIcon className="w-8 h-8" />
-						{ showAddOver ? (
-							<span className="absolute left-20 bg-white py-2 px-4 rounded shadow-xl">Add new</span> 
+						{showAddOver ? (
+							<span className="absolute left-20 font-semibold bg-white py-2 px-4 rounded shadow-xl">Add new</span>
 						) : null}
 					</div>
 					<div
@@ -73,8 +92,8 @@ const Home = () => {
 						onMouseOut={() => setShowRemoveOver(prev => !prev)}
 						onClick={() => setShowRemoveDialog(prev => !prev)}>
 						<TrashIcon className="w-8 h-8" />
-						{ showRemoveOver ? (
-							<span className="absolute left-20 bg-white py-2 px-4 rounded shadow-xl">Remove</span> 
+						{showRemoveOver ? (
+							<span className="absolute left-20 font-semibold bg-white py-2 px-4 rounded shadow-xl">Remove</span>
 						) : null}
 					</div>
 				</div>
@@ -92,42 +111,9 @@ const Home = () => {
 						</svg>
 					</div>
 					<div className="flex flex-col p-2 space-y-4">
-						<a href="" className="">
-							<div className="flex items-center justify-between">
-								<div className="flex flex-auto">
-									<ComputerIcon className="stroke-icon-grey mr-2" />
-									aws-ceb-checker
-								</div>
-								<CheckIcon />
-							</div>
-						</a>
-						<a href="" className="">
-							<div className="flex items-center justify-between">
-								<div className="flex flex-auto">
-									<ComputerIcon className="stroke-icon-grey mr-2" />
-									aws-ceb-checker
-								</div>
-								<CheckIcon />
-							</div>
-						</a>
-						<a href="" className="">
-							<div className="flex items-center justify-between">
-								<div className="flex flex-auto">
-									<ComputerIcon className="stroke-icon-grey mr-2" />
-									aws-ceb-checker
-								</div>
-								<CheckIcon />
-							</div>
-						</a>
-						<a href="" className="">
-							<div className="flex items-center justify-between">
-								<div className="flex flex-auto">
-									<ComputerIcon className="stroke-icon-grey mr-2" />
-									aws-ceb-checker
-								</div>
-								<CheckIcon />
-							</div>
-						</a>
+						{machines.map(machine => {
+							return (<MachineOption text={machine} />);	
+						})}
 					</div>
 				</div>
 			</div>
@@ -137,13 +123,13 @@ const Home = () => {
 				set={setShowAddDialog}
 				title="Add a machine"
 				description="Here you will add a new machine that you need to monitor. Click save when you're done."
-				fields={AddDialogFields}/>
+				fields={AddDialogFields} />
 			<Dialog
 				show={showRemoveDialog}
 				set={setShowRemoveDialog}
 				title="Remove a machine"
 				description="Here you will remove an existent machine from the dashboard. Click save when you're done."
-				fields={RemoveDialogFields}/>
+				fields={RemoveDialogFields} />
 		</div>
 	);
 }
