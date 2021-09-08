@@ -5,14 +5,29 @@ export default function Dashboard({ machineName }) {
 	const [machineInfo, setMachineInfo] = useState({});
 	const [machine, setMachine] = useState("");
 
+	const [timerSeconds, setTimerSeconds] = useState(45);
+
+	const tick = () => {
+		if (timerSeconds == 0) return clearTimer();
+		setTimerSeconds(timerSeconds - 1);
+	}
+
+	const clearTimer = () => setTimerSeconds(45);
+
 	useEffect(() => {
 		setMachine(machineName);
+		clearTimer();
 	}, [machineName, setMachine]);
 
 	useEffect(async () => {
 		const machineData = await axios.get(`http://localhost:8080/machines/${machine}`);
 		setMachineInfo(machineData.data.machine);
 	}, [machine, setMachineInfo]);
+
+	useEffect(() => {
+		const timerId = setInterval(tick, 1000);
+		return () => clearInterval(timerId);
+	});
 
 	return (
 		<div className="flex-auto bg-white rounded-tl-xl shadow-xl">
@@ -22,7 +37,7 @@ export default function Dashboard({ machineName }) {
 						{machine}
 					</h1>
 					<h3 className="self-end text-gray-400">
-						Refreshing in 32 seconds
+						Refreshing in {timerSeconds} seconds
 					</h3>
 				</div>
 				<h3 className="text-gray-400">
@@ -34,12 +49,12 @@ export default function Dashboard({ machineName }) {
 				and for that we'll need to push the marcys-link further
 				to monitor the machines and save those information on db.
 			*/}
-			{machineInfo ? (
+			{/* {machineInfo ? (
 				<div>
 					{machineInfo.ip}
 					{machineInfo.nickname}
 				</div>
-			) : null}
+			) : null} */}
 		</div>
 	);
 }
