@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import Dialog from '../components/dialog';
-import Sidebar from '../components/sidebar';
+import Dashboard from '../components/dashboard';
 
 import { ComputerIcon } from '../components/icons/computer';
 import { CheckIcon } from '../components/icons/check';
@@ -32,20 +32,9 @@ const RemoveDialogFields = [
 	}
 ]
 
-function MachineOption(props) {
-	return (
-		<div className="flex items-center justify-between">
-			<div className="flex flex-auto">
-				<ComputerIcon className="stroke-icon-grey mr-2" />
-				{props.text}
-			</div>
-			<CheckIcon />
-		</div>
-	);
-}
-
 const Home = () => {
 	const [machines, setMachines] = useState([]);
+	const [machine, setMachine] = useState("");
 
 	const [showAddDialog, setShowAddDialog] = useState(false);
 	const [showRemoveDialog, setShowRemoveDialog] = useState(false);
@@ -57,7 +46,8 @@ const Home = () => {
 	useEffect(async () => {
 		const machines = await axios.get('http://localhost:8080/machines');
 		setMachines(machines.data.machines);
-	}, [setMachines]);
+		setMachine(machines.data.machines[0]);
+	}, [setMachine, setMachines]);
 
 	return (
 		<div className="flex h-screen bg-gray-100">
@@ -106,18 +96,25 @@ const Home = () => {
 				<div className="flex flex-col h-64">
 					<div className="flex items-center space-x-2 mb-2">
 						<h1 className="font-semibold text-md">Machines</h1>
-						<svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-						</svg>
 					</div>
 					<div className="flex flex-col p-2 space-y-4">
 						{machines.map(machine => {
-							return (<MachineOption text={machine} />);	
+							return (
+								<button key={machine} className="flex items-center justify-between outline-none" onClick={() => setMachine(machine)}>
+									<div className="flex flex-auto">
+										<ComputerIcon className="stroke-icon-grey mr-2" />
+										{machine}
+									</div>
+									<CheckIcon />
+								</button>
+							);
 						})}
 					</div>
 				</div>
 			</div>
-			<div className="flex-auto bg-white rounded-tl-xl shadow-xl"></div>
+			<Dashboard
+				machineName={machine}/>
+			{/* Create logic that handles the add and remove machine using this dialogs */}
 			<Dialog
 				show={showAddDialog}
 				set={setShowAddDialog}
