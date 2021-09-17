@@ -1,13 +1,14 @@
-import path from 'path';
-import webpack from 'webpack';
+import * as path from 'path';
+import * as webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import sveltePreprocess from 'svelte-preprocess';
 
-const mode = process.env.NODE_ENV || 'development';
+type Mode = 'development' | 'production'
+const mode = process.env.NODE_ENV as Mode || 'development';
 const prod = mode === 'production';
 
-module.exports = {
+const config: webpack.Configuration = {
   entry: {
     'build/bundle': ['./src/main.ts', './public/css/global.css']
   },
@@ -28,8 +29,17 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        use: {
+          loader: 'ts-loader',
+          options: {
+            compilerOptions: {
+              noEmit: false,
+              module: 'commonjs',
+              target: 'es6'
+            }
+          }
+        }
       },
       {
         test: /\.svelte$/,
@@ -37,12 +47,17 @@ module.exports = {
           loader: 'svelte-loader',
           options: {
             compilerOptions: {
-              dev: !prod
+              dev: !prod,
             },
             emitCss: prod,
             hotReload: !prod,
             preprocess: sveltePreprocess({
-              sourceMap: !prod
+              sourceMap: !prod,
+              typescript: {
+                compilerOptions: {
+                  module: 'es6'
+                }
+              }
             })
           }
         }
@@ -89,7 +104,6 @@ module.exports = {
     })
   ],
   devtool: prod ? false : 'source-map',
-  devServer: {
-    hot: true
-  }
 };
+
+export default config;
