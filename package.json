@@ -1,24 +1,39 @@
 {
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "next": "latest",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
+  "name": "marcys-interface",
+  "version": "1.0.0",
+  "license": "MIT",
   "devDependencies": {
-    "@headlessui/react": "^1.4.0",
-    "@heroicons/react": "^1.0.4",
-    "@types/react": "^17.0.19",
-    "autoprefixer": "^10.2.6",
+    "@tsconfig/svelte": "^1.0.10",
+    "@types/html-webpack-plugin": "^3.2.6",
+    "@types/mini-css-extract-plugin": "^2.3.0",
+    "@types/node": "^14.11.1",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.0.1",
     "eslint": "^7.32.0",
-    "eslint-config-next": "^11.1.0",
-    "postcss": "^8.3.5",
-    "tailwindcss": "^2.2.4",
-    "typescript": "^4.3.5"
+    "eslint-plugin-no-only-tests": "^2.6.0",
+    "eslint-plugin-svelte3": "^3.2.1",
+    "html-webpack-plugin": "^5.3.2",
+    "mini-css-extract-plugin": "^1.3.4",
+    "prettier": "^2.4.1",
+    "svelte": "^3.31.2",
+    "svelte-check": "^1.0.46",
+    "svelte-loader": "^3.0.0",
+    "svelte-preprocess": "^4.3.0",
+    "ts-loader": "^8.0.4",
+    "ts-node": "^10.2.1",
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.3",
+    "webpack": "^5.16.0",
+    "webpack-cli": "^4.4.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "webpack serve --content-base public",
+    "validate": "svelte-check",
+    "lint": "eslint . --ignore-path .gitignore --ext .js,.ts,.svelte --max-warnings=0",
+    "prettier": "prettier \"**/*.@(js|ts|json)\" --ignore-path .gitignore"
   }
 }

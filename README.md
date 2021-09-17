@@ -1,29 +1,34 @@
-# Next.js + Tailwind CSS Example
+# marcys-interface
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+[![Open Issues](https://img.shields.io/github/issues/aprade/marcys-interface.svg)](https://github.com/aprade/marcys-interface/issues)
+[![Closed Issues](https://img.shields.io/github/issues-closed/aprade/marcys-interface.svg)](https://github.com/aprade/marcys-interface/issues?q=is%3Aissue+is%3Aclosed)
+<a href="https://github.com/aprade/marcys-interface/pulse" alt="Activity">
+        <img src="https://img.shields.io/github/commit-activity/m/aprade/marcys-interface" /></a>
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+## Contributing
 
-## Preview
+There are many ways in which you can participate in this project, for example:
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+* [Submit bugs and feature requests](https://github.com/aprade/marcys-interface/issues), and help us verify as they are checked in
+* Review [source code changes](https://github.com/aprade/marcys-interface/pulls)
+* Review the [documentation](https://docs.aprade.com/marcys-interface) and make pull requests for anything from typos to additional and new content
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+If you are interested in fixing issues and contributing directly to the code base,
+please see the document [How to Contribute](https://docs.aprade.com/marcys-interface/contributing/how-to-contribute), which covers the following:
 
-## Deploy your own
+* [How to build and run from source](https://docs.aprade.com/marcys-interface/contributing/how-to-contribute)
+* [Coding guidelines](https://docs.aprade.com/marcys-interface/developing/conding-guidelines)
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+## Feedback
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+* Ask a question on [our Discord server](https://discord.gg/5cy3UVd)
+* [Request a new feature](CONTRIBUTING.md)
+* [File an issue](https://github.com/aprade/marcys-interface/issues)
 
-## How to use
+## Related Projects
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+The [marcys-interface](https://github.com/aprade/marcys-interface) and the [marcys-client](https://github.com/aprade/marcys) which are both part of the same project have their own repository on GitHub.
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+## Code of Conduct
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
