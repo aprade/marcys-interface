@@ -4,8 +4,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import sveltePreprocess from 'svelte-preprocess';
 
-type Mode = 'development' | 'production'
-const mode = process.env.NODE_ENV as Mode || 'development';
+type Mode = 'development' | 'production';
+const mode = (process.env.NODE_ENV as Mode) || 'development';
 const prod = mode === 'production';
 
 const config: webpack.Configuration = {
@@ -34,9 +34,7 @@ const config: webpack.Configuration = {
           loader: 'ts-loader',
           options: {
             compilerOptions: {
-              noEmit: false,
-              module: 'commonjs',
-              target: 'es6'
+              noEmit: false
             }
           }
         }
@@ -47,13 +45,13 @@ const config: webpack.Configuration = {
           loader: 'svelte-loader',
           options: {
             compilerOptions: {
-              dev: !prod,
+              dev: !prod
             },
             emitCss: prod,
             hotReload: !prod,
             preprocess: sveltePreprocess({
               sourceMap: !prod,
-              typescript: {
+              type: {
                 compilerOptions: {
                   module: 'es6'
                 }
@@ -96,14 +94,12 @@ const config: webpack.Configuration = {
         HandheldFriendly: 'true',
         'Content-Security-Policy': {
           'http-equiv': 'Content-Security-Policy',
-          content: prod
-            ? "script-src 'self'"
-            : "script-src 'self' 'unsafe-eval'"
+          content: prod ? "-src 'self'" : "-src 'self' 'unsafe-eval'"
         }
       }
     })
   ],
-  devtool: prod ? false : 'source-map',
+  devtool: prod ? false : 'source-map'
 };
 
 export default config;

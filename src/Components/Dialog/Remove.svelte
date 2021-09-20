@@ -1,0 +1,73 @@
+<script lang="ts">
+  import { slide } from 'svelte/transition';
+
+  import Button from '../Button.svelte';
+
+  export let show: boolean = false;
+
+  const close = (): boolean => (show = false);
+
+  $: show;
+</script>
+
+{#if show}
+  <div transition:slide class="dialog-remove">
+    <div>
+      <h1>Oh, do you really want to remove this machine ? ️😞</h1>
+      <p>
+        After we remove it from the database you wont be able to see it again.
+      </p>
+    </div>
+
+    <div class="call-to-action">
+      <Button variant="simple" style="margin-left:25px;" on:click={close}
+        >Cancel</Button
+      >
+      <Button>Continue</Button>
+    </div>
+  </div>
+{/if}
+
+<style>
+  .dialog-remove {
+    position: absolute;
+
+    background-color: #17181a;
+
+    width: 334px;
+    height: 262px;
+    padding: 30px;
+
+    border: 0.4px solid #28292d;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    filter: drop-shadow(4px 4px 10px rgba(19, 20, 22, 0.15));
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  h1 {
+    color: white;
+    font-size: 23px;
+  }
+
+  p {
+    color: #636363;
+    margin-top: 15px;
+    margin-bottom: 30px;
+  }
+
+  .call-to-action {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
