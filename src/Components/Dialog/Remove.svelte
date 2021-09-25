@@ -35,7 +35,6 @@
     background-color: #17181a;
 
     width: 334px;
-    height: 262px;
     padding: 30px;
 
     border: 0.4px solid #28292d;
@@ -55,7 +54,7 @@
 
   h1 {
     color: white;
-    font-size: 23px;
+    font-size: 20px;
   }
 
   p {
@@ -69,5 +68,11 @@
 
     display: flex;
     justify-content: space-between;
+  }
+
+  @media screen and (min-width: 1650px) {
+    h1 {
+      font-size: 23px;
+    }
   }
 </style>
