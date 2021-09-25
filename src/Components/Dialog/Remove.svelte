@@ -1,5 +1,6 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
+  import { machines, machine } from '../../stores/machines';
 
   import Button from '../Button.svelte';
 
@@ -8,6 +9,13 @@
   const close = (): boolean => (show = false);
 
   $: show;
+
+  const removeMachine = () => {
+    machines.update(machines => machines.filter(value => value !== $machine));
+    machine.update(_ => $machines[0]);
+
+    close();
+  }
 </script>
 
 {#if show}
@@ -23,7 +31,7 @@
       <Button variant="simple" style="margin-left:25px;" on:click={close}
         >Cancel</Button
       >
-      <Button>Continue</Button>
+      <Button on:click={removeMachine}>Continue</Button>
     </div>
   </div>
 {/if}

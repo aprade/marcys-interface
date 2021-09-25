@@ -1,5 +1,6 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
+  import { machines, machine } from '../../stores/machines';
 
   import Input from '../Input.svelte';
   import Button from '../Button.svelte';
@@ -9,6 +10,18 @@
   const close = (): boolean => (show = false);
 
   $: show;
+
+  let machineNickname: string;
+  let machineIp: string;
+
+  const addMachine = () => {
+    // Request API to add this new machine, if successfull add it to store;
+    machines.update(machines => [machineNickname, ...machines]);
+    machine.update(_ => machineNickname);
+    console.log('added machine successfuly', machines, machine);
+
+    close();
+  };
 </script>
 
 {#if show}
@@ -22,6 +35,7 @@
     <div class="form">
       <label for="machine-nickname">Machine name</label>
       <Input
+        bind:value={machineNickname}
         name="machine-nickname"
         placeholder="localhost"
         style="margin-top: 5px; margin-bottom: 25px;"
@@ -29,6 +43,7 @@
 
       <label for="machine-ip-address">Machine IP address</label>
       <Input
+        value={machineIp}
         name="machine-ip-address"
         placeholder="127.0.0.1"
         style="margin-top: 5px; margin-bottom: 25px;"
@@ -39,7 +54,7 @@
       <Button variant="simple" style="margin-left:25px;" on:click={close}
         >Cancel</Button
       >
-      <Button>Continue</Button>
+      <Button on:click={addMachine}>Continue</Button>
     </div>
   </div>
 {/if}

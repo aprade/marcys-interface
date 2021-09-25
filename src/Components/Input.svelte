@@ -2,9 +2,10 @@
   export let name: string = '';
   export let placeholder: string = '';
   export let style: string = '';
+  export let value: string;
 </script>
 
-<input {name} {placeholder} {style} />
+<input {name} {placeholder} {style} bind:value />
 
 <style>
   input {
