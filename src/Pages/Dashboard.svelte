@@ -1,15 +1,18 @@
 <script lang="ts">
   import { counter, countdown } from '../stores/countdown';
   import { machines } from '../stores/machines';
+  import { isApiUp } from '../stores/api';
+  import { checkApiUp } from '../remote';
+
+  import WarningDialog from '../Components/Dialog/Warning.svelte';
 
   counter.subscribe((value: number): void => {
     if (value === 0) {
-      // Call marcys-link for updated information
+      checkApiUp();
     }
   });
   countdown();
-
-  $: console.log('machines', $machines);
+  checkApiUp();
 </script>
 
 <div class="dashboard">
@@ -17,6 +20,10 @@
     <h1>Dashboard</h1>
     <h2>Refreshing in {$counter} seconds</h2>
   </div>
+
+  {#if !$isApiUp}
+    <WarningDialog message='Our API is offline, please wait until it comes back to life. ️😞'/>
+  {/if}
 </div>
 
 <style>
