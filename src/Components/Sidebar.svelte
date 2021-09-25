@@ -1,12 +1,15 @@
 <script lang="ts">
   import DialogAdd from './Dialog/Add.svelte';
   import DialogRemove from './Dialog/Remove.svelte';
+  import DialogSelect from './Dialog/Select.svelte';
 
   let showAddDialog: boolean = false;
   let showRemoveDialog: boolean = false;
+  let showSelectDialog: boolean = true;
 
   $: showAddDialog;
   $: showRemoveDialog;
+  $: showSelectDialog;
 </script>
 
 <div class="sidebar">
@@ -14,7 +17,7 @@
 
   <div class="menu">
     <div class="top-menu">
-      <div class="item">
+      <div class="item" on:click={() => (showSelectDialog = true)}>
         <svg
           width="21"
           height="21"
@@ -110,6 +113,7 @@
 
   <DialogAdd bind:show={showAddDialog} />
   <DialogRemove bind:show={showRemoveDialog} />
+  <DialogSelect bind:show={showSelectDialog} />
 </div>
 
 <style>
