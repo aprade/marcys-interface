@@ -15,7 +15,7 @@
     machine.update(_ => $machines[0]);
 
     close();
-  }
+  };
 </script>
 
 {#if show}

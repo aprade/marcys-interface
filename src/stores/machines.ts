@@ -5,12 +5,13 @@ export const machines = writable<Array<string>>(
 );
 
 machines.subscribe((machines: Array<string>) =>
-  localStorage.setItem('machines', JSON.stringify(machines))
+  localStorage.setItem(
+    'machines',
+    JSON.stringify(machines.sort((a, b) => (a < b ? -1 : a > b ? 1 : 0)))
+  )
 );
 
-export const machine = writable<string>(
-  localStorage.getItem('machine') || ''
-);
+export const machine = writable<string>(localStorage.getItem('machine') || '');
 
 machine.subscribe((machine: string) =>
   localStorage.setItem('machine', machine)

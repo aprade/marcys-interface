@@ -5,7 +5,7 @@
 
   let showAddDialog: boolean = false;
   let showRemoveDialog: boolean = false;
-  let showSelectDialog: boolean = true;
+  let showSelectDialog: boolean = false;
 
   $: showAddDialog;
   $: showRemoveDialog;

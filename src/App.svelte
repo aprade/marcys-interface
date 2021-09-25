@@ -45,7 +45,7 @@
   }
 
   header h1 {
-    color: #FFF;
+    color: #fff;
     font-size: 24px;
     font-weight: 600;
   }
