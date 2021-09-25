@@ -1,19 +1,18 @@
 <script lang="ts">
-  import { timer, time, isCycleComplete } from '../stores/countdown';
+  import { counter, countdown } from '../stores/countdown';
 
-  timer.start();
-
-  isCycleComplete.subscribe(value => {
-    if (value) {
+  counter.subscribe((value: number): void => {
+    if (value == 0) {
       // Call marcys-link for updated information
     }
   });
+  countdown();
 </script>
 
 <div class="dashboard">
   <div class="title">
     <h1>Dashboard</h1>
-    <h2>Refreshing in {$time} seconds</h2>
+    <h2>Refreshing in {$counter} seconds</h2>
   </div>
 </div>
 
