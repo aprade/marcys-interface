@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
+import type * as webpackDev from 'webpack-dev-server';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import sveltePreprocess from 'svelte-preprocess';
@@ -8,11 +9,16 @@ type Mode = 'development' | 'production';
 const mode = (process.env.NODE_ENV as Mode) || 'development';
 const prod = mode === 'production';
 
-const config: webpack.Configuration = {
+interface Configuration extends webpack.Configuration {
+  devServer: webpackDev.Configuration;
+}
+
+const config: Configuration = {
   entry: {
     'build/bundle': ['./src/main.ts', './public/css/global.css']
   },
   resolve: {
+    fallback: { process: false },
     alias: {
       svelte: path.dirname(require.resolve('svelte/package.json'))
     },
@@ -20,7 +26,8 @@ const config: webpack.Configuration = {
     mainFields: ['svelte', 'browser', 'module', 'main']
   },
   output: {
-    path: path.join(__dirname, '/public'),
+    path: path.join(__dirname, '/dist'),
+    publicPath: '/build/',
     filename: '[name].js',
     chunkFilename: '[name].[id].js'
   },
@@ -41,6 +48,7 @@ const config: webpack.Configuration = {
       },
       {
         test: /\.svelte$/,
+        exclude: /node_modules/,
         use: {
           loader: 'svelte-loader',
           options: {
@@ -99,6 +107,10 @@ const config: webpack.Configuration = {
       }
     })
   ],
+  devServer: {
+    hot: true,
+    static: 'dist'
+  },
   devtool: prod ? false : 'source-map'
 };
 
