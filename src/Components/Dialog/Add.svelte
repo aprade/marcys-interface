@@ -1,6 +1,7 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
   import { machines, machine } from '../../stores/machines';
+  import * as api from '../../api/machines';
 
   import Input from '../Input.svelte';
   import Button from '../Button.svelte';
@@ -14,11 +15,22 @@
   let machineNickname: string;
   let machineIp: string;
 
-  const addMachine = () => {
-    // Request API to add this new machine, if successfull add it to store;
-    machines.update(machines => [machineNickname, ...machines]);
-    machine.update(_ => machineNickname);
-    console.log('added machine successfuly', machines, machine);
+  const addMachine = async () => {
+    const result = await api.addMachine({
+      nickname: machineNickname,
+      ip: machineIp
+    });
+
+    console.log('result', result);
+    if (result.ok) {
+      machines.update(machines => [machineNickname, ...machines]);
+      machine.update(_ => machineNickname);
+      console.log('added machine successfuly:', result.message);
+      // Show notification saying it's working
+    } else {
+      console.log('could not add machine:', result.message);
+      // Show notification saying it hone wrong
+    }
 
     close();
   };
