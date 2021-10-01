@@ -11,18 +11,18 @@
     </div>
   </div>
 </div>
-  
+
 <style>
   .dialog-bg {
     position: absolute;
 
     top: 0;
     left: 0;
-  
+
     width: 100vw;
     height: 100vh;
 
-    background-color: rgba(19, 20, 22, .4);
+    background-color: rgba(19, 20, 22, 0.4);
     backdrop-filter: saturate(100%) blur(10px);
   }
 

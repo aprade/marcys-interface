@@ -1,6 +1,7 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
   import { machines, machine } from '../../stores/machines';
+  import { createNotification } from '../../stores/notification';
   import * as api from '../../api/machines';
 
   import Input from '../Input.svelte';
@@ -25,11 +26,9 @@
     if (result.ok) {
       machines.update(machines => [machineNickname, ...machines]);
       machine.update(_ => machineNickname);
-      console.log('added machine successfuly:', result.message);
-      // Show notification saying it's working
+      createNotification(result.message, 'success');
     } else {
-      console.log('could not add machine:', result.message);
-      // Show notification saying it hone wrong
+      createNotification(result.message, 'error');
     }
 
     close();
@@ -55,7 +54,7 @@
 
       <label for="machine-ip-address">Machine IP address</label>
       <Input
-        value={machineIp}
+        bind:value={machineIp}
         name="machine-ip-address"
         placeholder="127.0.0.1"
         style="margin-top: 5px; margin-bottom: 25px;"

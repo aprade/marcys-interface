@@ -5,6 +5,7 @@
   import { checkApiUp } from '../remote';
 
   import WarningDialog from '../Components/Dialog/Warning.svelte';
+  import Notification from '../Components/Notification.svelte';
 
   counter.subscribe((value: number): void => {
     if (value === 0) {
@@ -21,9 +22,12 @@
     <h2>Refreshing in {$counter} seconds</h2>
   </div>
 
-  {#if !$isApiUp}
-    <WarningDialog message='Our API is offline, please wait until it comes back to life. ️😞'/>
+  {#if !$isApiUp && process.env.NODE_ENV !== 'development'}
+    <WarningDialog
+      message="Our API is offline, please wait until it comes back to life. 😞"
+    />
   {/if}
+  <Notification />
 </div>
 
 <style>

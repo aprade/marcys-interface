@@ -30,5 +30,5 @@ export const addMachine = async (machine: Machine): Promise<Result> => {
     return { ok: false, message: response.message };
   }
 
-  return { ok: false, message: response.message };
+  return { ok: true, message: response.message };
 };
