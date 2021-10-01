@@ -22,10 +22,11 @@
       ip: machineIp
     });
 
-    console.log('result', result);
     if (result.ok) {
-      machines.update(machines => [machineNickname, ...machines]);
-      machine.update(_ => machineNickname);
+      if (!$machines.includes(machineNickname)) {
+        machines.update(machines => [machineNickname, ...machines]);
+        machine.update(_ => machineNickname);
+      }
       createNotification(result.message, 'success');
     } else {
       createNotification(result.message, 'error');
