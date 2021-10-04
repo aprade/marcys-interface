@@ -122,6 +122,7 @@
 
     height: 100vh;
     width: fit-content;
+    width: -moz-fit-content;
     padding: 0 25px;
 
     display: flex;
