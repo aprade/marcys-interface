@@ -27,9 +27,9 @@
         machines.update(machines => [machineNickname, ...machines]);
         machine.update(_ => machineNickname);
       }
-      createNotification(result.message, 'success');
+      createNotification(result.ok, 'success');
     } else {
-      createNotification(result.message, 'error');
+      createNotification(result.err!, 'error');
     }
 
     close();
