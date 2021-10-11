@@ -1,0 +1,18 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html, body {
+	background-color: #131416;
+
+	width: 100vw;
+	height: 100vh;
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-feature-settings: "ss01", "ss02", "cv01";
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+	scrollbar-width: none;
+}
